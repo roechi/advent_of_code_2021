@@ -3,7 +3,7 @@ def sweep(raw_input: list[str]) -> int:
     count = 0
     for i in range(len(measurements) - 1):
         if measurements[i + 1] > measurements[i]:
-            count = count + 1
+            count += 1
 
     return count
 
@@ -13,7 +13,7 @@ def sweep_window(raw_input: list[str], window_size: int) -> int:
     measurements = list(map(int, raw_input))
     for i in range(len(measurements) - window_size):
         if sum(measurements[i + 1:i + window_size + 1]) > sum(measurements[i:i + window_size]):
-            count = count + 1
+            count += 1
 
     return count
 
