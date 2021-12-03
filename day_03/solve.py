@@ -24,13 +24,10 @@ def vectorize(lines):
     return vecs
 
 
-def get_most_common_bit(vecs, pos, if_equal):
+def get_most_common_bit(vecs, pos):
     sum = reduce(lambda a, b: a + b, vecs)
 
-    if sum[pos] == len(vecs) / 2:
-        return if_equal
-
-    return 1 if sum[pos] > len(vecs) / 2 else 0
+    return 1 if sum[pos] >= len(vecs) / 2 else 0
 
 
 def solve(lines):
@@ -40,7 +37,7 @@ def solve(lines):
     gamma = []
     epsilon = []
     for i in range(len(sum)):
-        most_common = get_most_common_bit(vecs, i, 1)
+        most_common = get_most_common_bit(vecs, i)
         gamma.append(most_common)
         epsilon.append((most_common + 1) % 2)
 
@@ -53,14 +50,14 @@ def solve2(lines):
     oxygen = vecs
     i = 0
     while len(oxygen) > 1:
-        filter_bit = get_most_common_bit(oxygen, i, 1)
+        filter_bit = get_most_common_bit(oxygen, i)
         oxygen = list(filter(lambda x: x[i] == filter_bit, oxygen))
         i += 1
 
     i = 0
     co2_scrubber = vecs
     while len(co2_scrubber) > 1:
-        filter_bit = (get_most_common_bit(co2_scrubber, i, 1) + 1) % 2
+        filter_bit = (get_most_common_bit(co2_scrubber, i) + 1) % 2
         co2_scrubber = list(filter(lambda x: x[i] == filter_bit, co2_scrubber))
         i += 1
 
