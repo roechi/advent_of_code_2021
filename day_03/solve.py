@@ -39,7 +39,7 @@ def solve(lines):
     for i in range(len(sum)):
         most_common = get_most_common_bit(vecs, i)
         gamma.append(most_common)
-        epsilon.append((most_common + 1) % 2)
+        epsilon.append(most_common ^ 1)
 
     return bin_array_to_int(gamma) * bin_array_to_int(epsilon)
 
@@ -57,7 +57,7 @@ def solve2(lines):
     i = 0
     co2_scrubber = vecs
     while len(co2_scrubber) > 1:
-        filter_bit = (get_most_common_bit(co2_scrubber, i) + 1) % 2
+        filter_bit = get_most_common_bit(co2_scrubber, i) ^ 1
         co2_scrubber = list(filter(lambda x: x[i] == filter_bit, co2_scrubber))
         i += 1
 
